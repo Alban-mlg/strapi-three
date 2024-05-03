@@ -1,7 +1,11 @@
 import React, { useRef, useState } from 'react';
-import { Canvas } from '@react-three/fiber';
-import { OrbitControls, Stars, Plane, Box } from '@react-three/drei';
+import { Canvas, extend } from '@react-three/fiber';
+import { OrbitControls, Stars, Plane } from '@react-three/drei';
+import * as THREE from 'three';
 import { useSpring, a } from '@react-spring/three';
+
+// Extend THREE to include BoxBufferGeometry for declarative use
+extend({ BoxBufferGeometry: THREE.BoxBufferGeometry });
 
 // This component will create a more immersive 3D space environment with interactive elements
 const SpaceTheme = () => {
@@ -44,7 +48,7 @@ const SpaceTheme = () => {
         onClick={() => setActive(!active)}
         onPointerOver={() => setHover(true)}
         onPointerOut={() => setHover(false)}>
-        <Box attach="geometry" args={[1, 1, 1]} />
+        <boxBufferGeometry attach="geometry" args={[1, 1, 1]} />
         <a.meshStandardMaterial attach="material" color={props.color} />
       </a.mesh>
     </Canvas>
