@@ -3,6 +3,7 @@ import { Box, Text, VStack, Image, Heading } from '@chakra-ui/react';
 import astronautImage from './assets/astronaut.png'; // Placeholder for an actual image
 
 const About = () => {
+  console.log('Rendering About component');
   return (
     <VStack spacing={5} align="stretch">
       <Box>
