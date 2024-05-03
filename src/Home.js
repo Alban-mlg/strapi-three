@@ -2,6 +2,7 @@ import React from 'react';
 import { Box, Text, Button } from '@chakra-ui/react';
 
 const Home = () => {
+  console.log('Rendering Home component');
   return (
     <Box textAlign="center" py={10} px={6}>
       <Text
