@@ -1,25 +1,44 @@
-import React from 'react';
-import { Canvas } from '@react-three/fiber';
+import React, { useRef } from 'react';
+import { Canvas, useFrame } from '@react-three/fiber';
 import { OrbitControls, Stars, Plane, Box } from '@react-three/drei';
+import { useSpring, a } from '@react-spring/three';
 
 // This component will create a more immersive 3D space environment with interactive elements
 const SpaceTheme = () => {
   console.log('Rendering SpaceTheme component');
+  const boxRef = useRef();
+  const starsRef = useRef();
+
+  // Rotate stars to simulate galaxy rotation
+  useFrame(() => {
+    if (starsRef.current) {
+      starsRef.current.rotation.y += 0.0005;
+    }
+  });
+
+  // Floating animation for the box
+  const { scale } = useSpring({
+    from: { scale: 1 },
+    to: async (next) => {
+      while (1) {
+        await next({ scale: 1.1 });
+        await next({ scale: 1 });
+      }
+    },
+    config: { mass: 5, tension: 150, friction: 50 },
+  });
 
   return (
     <Canvas>
       <OrbitControls />
-      <Stars />
       <ambientLight intensity={0.5} />
       <spotLight position={[10, 15, 10]} angle={0.3} />
+      <Stars ref={starsRef} />
       <Plane args={[100, 100]} position={[0, -1, 0]} rotation={[-Math.PI / 2, 0, 0]} />
-      <mesh visible>
-        <meshStandardMaterial attach="material" color="white" />
-      </mesh>
-      <mesh>
+      <a.mesh ref={boxRef} scale={scale}>
         <Box args={[1, 1, 1]} />
         <meshStandardMaterial attach="material" color="gray" />
-      </mesh>
+      </a.mesh>
     </Canvas>
   );
 };
