@@ -42,12 +42,16 @@ const SpaceTheme = () => {
     };
 
     const canvasElement = canvasRef.current;
-    canvasElement.addEventListener('webglcontextlost', handleContextLost);
+    if (canvasElement) {
+      canvasElement.addEventListener('webglcontextlost', handleContextLost);
+    }
 
     return () => {
-      canvasElement.removeEventListener('webglcontextlost', handleContextLost);
+      if (canvasElement) {
+        canvasElement.removeEventListener('webglcontextlost', handleContextLost);
+      }
     };
-  }, []);
+  }, [canvasRef]); // Added dependency array to re-attach event listener if the ref changes
 
   return (
     <Canvas ref={canvasRef}>
