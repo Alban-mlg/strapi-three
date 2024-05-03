@@ -35,23 +35,23 @@ const SpaceTheme = () => {
   });
 
   useEffect(() => {
+    const canvasElement = canvasRef.current;
     const handleContextLost = (event) => {
       event.preventDefault();
       console.warn('WebGL context lost. Recovering...');
       // Here you can add any recovery logic or display a message to the user
     };
 
-    const canvasElement = canvasRef.current;
     if (canvasElement) {
-      canvasElement.addEventListener('webglcontextlost', handleContextLost);
+      canvasElement.addEventListener('webglcontextlost', handleContextLost, false);
     }
 
     return () => {
       if (canvasElement) {
-        canvasElement.removeEventListener('webglcontextlost', handleContextLost);
+        canvasElement.removeEventListener('webglcontextlost', handleContextLost, false);
       }
     };
-  }, [canvasRef]); // Added dependency array to re-attach event listener if the ref changes
+  }, []); // Removed dependency array to ensure the effect runs once on mount
 
   return (
     <Canvas ref={canvasRef}>
