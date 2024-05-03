@@ -1,4 +1,4 @@
-import React, { useRef, useCallback } from 'react';
+import React, { useRef, useEffect } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
 import { OrbitControls, Stars, Plane, Box } from '@react-three/drei';
 import { useSpring, a } from '@react-spring/three';
@@ -20,6 +20,7 @@ const AnimatedStars = () => {
 const SpaceTheme = () => {
   console.log('Rendering SpaceTheme component');
   const boxRef = useRef();
+  const canvasRef = useRef();
 
   // Floating animation for the box
   const { scale } = useSpring({
@@ -33,15 +34,23 @@ const SpaceTheme = () => {
     config: { mass: 5, tension: 150, friction: 50 },
   });
 
-  // Handle WebGL context loss
-  const handleContextLost = useCallback((event) => {
-    event.preventDefault();
-    console.warn('WebGL context lost. Recovering...');
-    // Here you can add any recovery logic or display a message to the user
+  useEffect(() => {
+    const handleContextLost = (event) => {
+      event.preventDefault();
+      console.warn('WebGL context lost. Recovering...');
+      // Here you can add any recovery logic or display a message to the user
+    };
+
+    const canvasElement = canvasRef.current;
+    canvasElement.addEventListener('webglcontextlost', handleContextLost);
+
+    return () => {
+      canvasElement.removeEventListener('webglcontextlost', handleContextLost);
+    };
   }, []);
 
   return (
-    <Canvas onContextLost={handleContextLost}>
+    <Canvas ref={canvasRef}>
       <OrbitControls />
       <ambientLight intensity={0.5} />
       <spotLight position={[10, 15, 10]} angle={0.3} />
