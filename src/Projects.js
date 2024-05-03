@@ -1,8 +1,8 @@
 import React from 'react';
 import { Box, SimpleGrid, Text, Image, VStack, Heading } from '@chakra-ui/react';
-import projectImage1 from './assets/project1.png'; // Placeholder for actual project images
-import projectImage2 from './assets/project2.png';
-import projectImage3 from './assets/project3.png';
+import projectImage1 from './assets/pexels-jonathanborba-18127555.jpg'; // Updated with actual project image
+import projectImage2 from './assets/pexels-daria-rohova-901305820-19824838.jpg'; // Updated with actual project image
+import projectImage3 from './assets/pexels-elly-fairytale-3811014.jpg'; // Updated with actual project image
 
 const projectsData = [
   {
