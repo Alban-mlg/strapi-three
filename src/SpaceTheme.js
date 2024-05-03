@@ -1,6 +1,6 @@
 import React, { useRef, useState } from 'react';
 import { Canvas } from '@react-three/fiber';
-import { OrbitControls, Stars, Plane, Sphere } from '@react-three/drei';
+import { OrbitControls, Stars, Plane } from '@react-three/drei';
 import { useSpring, a } from '@react-spring/three';
 
 // This component will create a more immersive 3D space environment with interactive elements
@@ -16,6 +16,9 @@ const SpaceTheme = () => {
   const props = useSpring({
     scale: active ? [1.5, 1.5, 1.5] : [1, 1, 1],
     color: hovered ? 'hotpink' : 'gray',
+    // Floating animation for the sphere
+    position: active ? [0, 0.1, 0] : [0, -0.1, 0],
+    config: { mass: 1, tension: 180, friction: 12 },
   });
 
   return (
@@ -25,9 +28,15 @@ const SpaceTheme = () => {
       <ambientLight intensity={0.5} />
       <spotLight position={[10, 15, 10]} angle={0.3} />
       <Plane args={[100, 100]} position={[0, -1, 0]} rotation={[-Math.PI / 2, 0, 0]} />
-      <Sphere visible position={[0, 0, 0]} args={[1, 16, 16]}>
+      <a.mesh
+        visible
+        position={props.position}
+        args={[1, 16, 16]}
+        onClick={() => setActive(!active)}
+        onPointerOver={() => setHover(true)}
+        onPointerOut={() => setHover(false)}>
         <meshStandardMaterial attach="material" color="white" />
-      </Sphere>
+      </a.mesh>
       <a.mesh
         ref={spaceRef}
         scale={props.scale}
