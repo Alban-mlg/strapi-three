@@ -2,6 +2,7 @@ import React from 'react';
 import { VStack, Heading, Text, Input, Textarea, Button } from '@chakra-ui/react';
 
 const Contact = () => {
+  console.log('Rendering Contact component');
   return (
     <VStack spacing={4} as="form" align="stretch" m={8}>
       <Heading as="h2" size="xl" textAlign="center">
