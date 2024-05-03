@@ -1,13 +1,13 @@
 import React from 'react';
 import { Box, Text, Button } from '@chakra-ui/react';
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 const Home = () => {
-  const history = useHistory();
+  const navigate = useNavigate();
   console.log('Rendering Home component');
 
   const navigateToAbout = () => {
-    history.push('/about');
+    navigate('/about');
   };
 
   return (
