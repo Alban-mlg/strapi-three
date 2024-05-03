@@ -5,6 +5,7 @@ import { useSpring, a } from '@react-spring/three';
 
 // This component will create a more immersive 3D space environment with interactive elements
 const SpaceTheme = () => {
+  console.log('Rendering SpaceTheme component');
   // This reference will give us direct access to the THREE.Mesh object
   const spaceRef = useRef();
 
