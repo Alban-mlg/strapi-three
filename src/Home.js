@@ -1,8 +1,15 @@
 import React from 'react';
 import { Box, Text, Button } from '@chakra-ui/react';
+import { useHistory } from 'react-router-dom';
 
 const Home = () => {
+  const history = useHistory();
   console.log('Rendering Home component');
+
+  const navigateToAbout = () => {
+    history.push('/about');
+  };
+
   return (
     <Box textAlign="center" py={10} px={6}>
       <Text
@@ -23,6 +30,7 @@ const Home = () => {
         _hover={{
           bgGradient: "linear(to-r, teal.600, green.600)",
         }}
+        onClick={navigateToAbout}
       >
         Discover More
       </Button>
