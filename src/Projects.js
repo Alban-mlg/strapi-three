@@ -24,6 +24,7 @@ const projectsData = [
 ];
 
 const Projects = () => {
+  console.log('Rendering Projects component');
   return (
     <VStack spacing={8} align="stretch">
       <Box>
