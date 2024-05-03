@@ -8,6 +8,8 @@ import Projects from './Projects';
 import Contact from './Contact';
 
 function App() {
+  console.log('Rendering App component');
+
   return (
     <Router>
       <Navigation />
