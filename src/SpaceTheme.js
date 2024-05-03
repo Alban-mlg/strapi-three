@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useRef, useEffect } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
 import { OrbitControls, Stars, Plane, Box } from '@react-three/drei';
 import { useSpring, a } from '@react-spring/three';
@@ -20,6 +20,7 @@ const AnimatedStars = () => {
 const SpaceTheme = () => {
   console.log('Rendering SpaceTheme component');
   const boxRef = useRef();
+  const canvasRef = useRef();
 
   // Floating animation for the box
   const { scale } = useSpring({
@@ -40,8 +41,17 @@ const SpaceTheme = () => {
     // Here you can add any recovery logic or display a message to the user
   };
 
+  useEffect(() => {
+    const currentCanvas = canvasRef.current;
+    currentCanvas.addEventListener('webglcontextlost', handleContextLost);
+
+    return () => {
+      currentCanvas.removeEventListener('webglcontextlost', handleContextLost);
+    };
+  }, []);
+
   return (
-    <Canvas onWebglcontextlost={handleContextLost}>
+    <Canvas ref={canvasRef}>
       <OrbitControls />
       <ambientLight intensity={0.5} />
       <spotLight position={[10, 15, 10]} angle={0.3} />
