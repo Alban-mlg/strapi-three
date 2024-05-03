@@ -41,11 +41,11 @@ const SpaceTheme = () => {
       // Here you can add any recovery logic or display a message to the user
     };
 
-    const canvasElement = canvasRef.current?.getContext('webgl');
-    canvasElement?.canvas.addEventListener('webglcontextlost', handleContextLost, false);
+    const canvasElement = canvasRef.current;
+    canvasElement.addEventListener('webglcontextlost', handleContextLost, false);
 
     return () => {
-      canvasElement?.canvas.removeEventListener('webglcontextlost', handleContextLost, false);
+      canvasElement.removeEventListener('webglcontextlost', handleContextLost, false);
     };
   }, []); // Removed dependency array to ensure the effect runs once on mount
 
