@@ -56,7 +56,7 @@ const Planets = () => {
         <sphereGeometry args={[2, 32, 32]} />
         <meshStandardMaterial map={jupiterTexture} />
       </mesh>
-      <ambientLight intensity={1.5} /> {/* Increased ambient light intensity */}
+      <ambientLight intensity={2} /> {/* Increased ambient light intensity */}
     </>
   );
 };
@@ -68,9 +68,9 @@ const SpaceTheme = () => {
 
   return (
     <Canvas>
-      <PerspectiveCamera ref={cameraRef} makeDefault fov={75} position={[0, 0, 30]} /> {/* Adjusted camera position */}
+      <PerspectiveCamera ref={cameraRef} makeDefault fov={75} position={[5, 0, 25]} /> {/* Adjusted camera position */}
       <OrbitControls enableZoom={true} enablePan={true} />
-      <ambientLight intensity={1.5} /> {/* Increased ambient light intensity */}
+      <ambientLight intensity={2} /> {/* Increased ambient light intensity */}
       <directionalLight
         intensity={1}
         position={[0, 10, 0]}
@@ -93,20 +93,21 @@ const SpaceTheme = () => {
           </button>
         </div>
       </Html>
-      <CameraMovement cameraRef={cameraRef} />
+      {/* <CameraMovement cameraRef={cameraRef} /> */}
     </Canvas>
   );
 };
 
 // This component will handle the camera movement based on mouse position
-const CameraMovement = ({ cameraRef }) => {
-  useFrame(({ mouse }) => {
-    const x = (mouse.x * 0.2);
-    const y = (mouse.y * 0.2);
-    cameraRef.current.position.lerp(new THREE.Vector3(x, y, 30), 0.1); // Adjusted camera lerp position
-  });
+// Temporarily disabled for stable camera view
+// const CameraMovement = ({ cameraRef }) => {
+//   useFrame(({ mouse }) => {
+//     const x = (mouse.x * 0.2);
+//     const y = (mouse.y * 0.2);
+//     cameraRef.current.position.lerp(new THREE.Vector3(x, y, 30), 0.1); // Adjusted camera lerp position
+//   });
 
-  return null;
-};
+//   return null;
+// };
 
 export default SpaceTheme;
