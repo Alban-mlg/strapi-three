@@ -92,11 +92,8 @@ const SpaceTheme = () => {
         shadow-camera-top={10}
         shadow-camera-bottom={-10}
       />
-      {/* Point lights added near Jupiter for localized lighting */}
-      <pointLight position={[5, 0, -18]} intensity={5} color="#ffffff" />
-      <pointLight position={[5, 0, -22]} intensity={5} color="#ffffff" />
-      <PerspectiveCamera ref={cameraRef} makeDefault fov={50} position={[0, 0, 50]} />
-      <OrbitControls enableZoom={true} enablePan={true} target={[10, 10, -50]} />
+      <PerspectiveCamera ref={cameraRef} makeDefault fov={75} position={[0, 0, 30]} />
+      <OrbitControls enableZoom={true} enablePan={true} target={[0, 0, 0]} />
       <AnimatedStars />
       <SciFiHelmetModel />
       <Planets />
