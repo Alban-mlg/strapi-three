@@ -15,7 +15,16 @@ const AnimatedStars = () => {
     }
   });
 
-  return <Stars ref={starsRef} color="#FFF" />;
+  return (
+    <Stars
+      ref={starsRef}
+      color="#FFF"
+      count={5000} // Increased number of stars for a more elaborate effect
+      factor={4} // Increased factor for more spread
+      saturation={0} // No color saturation for pure white stars
+      fade // Add a fading effect to the stars
+    />
+  );
 };
 
 // This component will display the SciFiHelmet model with a slow rotation
@@ -69,7 +78,7 @@ const SpaceTheme = () => {
   const cameraRef = useRef();
 
   return (
-    <Canvas>
+    <Canvas style={{ width: '100vw', height: '100vh' }}>
       <ambientLight intensity={10} />
       <directionalLight
         intensity={5} // Significantly increased directional light intensity
