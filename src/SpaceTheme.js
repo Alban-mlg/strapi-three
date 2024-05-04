@@ -39,7 +39,7 @@ const SciFiHelmetModel = () => {
     }
   });
 
-  return <primitive object={gltf.scene} scale={[2, 2, 2]} ref={helmetRef} />;
+  return <primitive object={gltf.scene} scale={[5, 5, 5]} position={[0, 1, 0]} ref={helmetRef} />;
 };
 
 // Planets component with detailed and textured planet models
@@ -100,9 +100,14 @@ const SpaceTheme = () => {
       <AnimatedStars />
       <SciFiHelmetModel />
       <Planets />
-      <mesh position={[0, 0, 0]} onClick={() => console.log('Interacted with 3D button!')}>
-        <boxGeometry args={[1, 0.1, 0.5]} />
-        <meshStandardMaterial color="lightblue" />
+      <mesh
+        position={[0, 0, 0]}
+        onClick={() => console.log('Interacted with 3D button!')}
+        onPointerOver={(e) => e.object.scale.set(1.2, 1.2, 1.2)} // Scale up on hover
+        onPointerOut={(e) => e.object.scale.set(1, 1, 1)} // Scale down on hover out
+      >
+        <boxGeometry args={[2, 0.2, 1]} /> {/* Increased size for better visibility */}
+        <meshStandardMaterial color="#4FD1C5" emissive="#1A202C" /> {/* Updated color to match space theme */}
       </mesh>
     </Canvas>
   );
