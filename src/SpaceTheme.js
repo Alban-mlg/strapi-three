@@ -52,8 +52,8 @@ const Planets = () => {
         <meshStandardMaterial map={marsTexture} />
       </mesh>
       {/* New Jupiter mesh */}
-      <mesh position={[5, 0, -20]}>
-        <sphereGeometry args={[2, 32, 32]} />
+      <mesh position={[5, 0, -15]}>
+        <sphereGeometry args={[2.5, 32, 32]} />
         <meshStandardMaterial map={jupiterTexture} />
       </mesh>
       <ambientLight intensity={2} /> {/* Increased ambient light intensity */}
