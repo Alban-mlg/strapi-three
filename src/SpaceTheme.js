@@ -1,6 +1,6 @@
 import React, { useRef, useEffect } from 'react';
 import { Canvas, useLoader, useFrame } from '@react-three/fiber';
-import { OrbitControls, Stars } from '@react-three/drei';
+import { OrbitControls, Stars, PerspectiveCamera } from '@react-three/drei';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
 
 // This component will handle the rotation of the stars
@@ -45,9 +45,21 @@ const SpaceTheme = () => {
 
   return (
     <Canvas ref={canvasRef}>
+      <PerspectiveCamera makeDefault position={[0, 0, 5]} />
       <OrbitControls />
       <ambientLight intensity={0.5} />
-      <spotLight position={[10, 15, 10]} angle={0.3} />
+      <directionalLight
+        intensity={1}
+        position={[0, 10, 0]}
+        castShadow
+        shadow-mapSize-height={512}
+        shadow-mapSize-width={512}
+        shadow-camera-far={50}
+        shadow-camera-left={-10}
+        shadow-camera-right={10}
+        shadow-camera-top={10}
+        shadow-camera-bottom={-10}
+      />
       <AnimatedStars />
       <SciFiHelmetModel />
     </Canvas>
