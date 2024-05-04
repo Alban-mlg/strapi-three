@@ -39,7 +39,7 @@ const SciFiHelmetModel = () => {
     }
   });
 
-  return <primitive object={gltf.scene} scale={[5, 5, 5]} position={[0, 1, 0]} ref={helmetRef} />;
+  return <primitive object={gltf.scene} scale={[10, 10, 10]} position={[0, 0, 0]} ref={helmetRef} />;
 };
 
 // Planets component with detailed and textured planet models
@@ -95,7 +95,7 @@ const SpaceTheme = () => {
       {/* Point lights added near Jupiter for localized lighting */}
       <pointLight position={[5, 0, -18]} intensity={5} color="#ffffff" />
       <pointLight position={[5, 0, -22]} intensity={5} color="#ffffff" />
-      <PerspectiveCamera ref={cameraRef} makeDefault fov={75} position={[0, 0, 100]} />
+      <PerspectiveCamera ref={cameraRef} makeDefault fov={50} position={[0, 0, 50]} />
       <OrbitControls enableZoom={true} enablePan={true} target={[10, 10, -50]} />
       <AnimatedStars />
       <SciFiHelmetModel />
@@ -112,17 +112,5 @@ const SpaceTheme = () => {
     </Canvas>
   );
 };
-
-// This component will handle the camera movement based on mouse position
-// Temporarily disabled for stable camera view
-// const CameraMovement = ({ cameraRef }) => {
-//   useFrame(({ mouse }) => {
-//     const x = (mouse.x * 0.2);
-//     const y = (mouse.y * 0.2);
-//     cameraRef.current.position.lerp(new THREE.Vector3(x, y, 30), 0.1); // Adjusted camera lerp position
-//   });
-
-//   return null;
-// };
 
 export default SpaceTheme;
