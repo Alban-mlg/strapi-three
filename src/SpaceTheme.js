@@ -9,19 +9,29 @@ import { TextureLoader } from 'three/src/loaders/TextureLoader';
 const AnimatedStars = () => {
   const starsRef = useRef();
 
-  useFrame(() => {
+  useFrame(({ clock }) => {
+    const elapsedTime = clock.getElapsedTime();
     if (starsRef.current) {
-      starsRef.current.rotation.y += 0.004; // Increased rotation speed for more elaborate effect
+      starsRef.current.rotation.y = elapsedTime * 0.05; // Variable rotation speed for dynamic effect
     }
   });
 
   return <Stars ref={starsRef} color="#FFF" />;
 };
 
-// This component will display the SciFiHelmet model
+// This component will display the SciFiHelmet model with a slow rotation
 const SciFiHelmetModel = () => {
   const gltf = useLoader(GLTFLoader, 'models/SciFiHelmet.gltf');
-  return <primitive object={gltf.scene} scale={[2, 2, 2]} />;
+  const helmetRef = useRef();
+
+  useFrame(({ clock }) => {
+    const elapsedTime = clock.getElapsedTime();
+    if (helmetRef.current) {
+      helmetRef.current.rotation.y = elapsedTime * 0.1; // Slow rotation for engaging effect
+    }
+  });
+
+  return <primitive object={gltf.scene} scale={[2, 2, 2]} ref={helmetRef} />;
 };
 
 // Planets component with detailed and textured planet models
