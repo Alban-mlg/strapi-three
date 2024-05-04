@@ -1,6 +1,6 @@
 import React, { useRef, useEffect } from 'react';
 import { Canvas, useLoader, useFrame } from '@react-three/fiber';
-import { OrbitControls, Stars, PerspectiveCamera } from '@react-three/drei';
+import { OrbitControls, Stars, PerspectiveCamera, Html } from '@react-three/drei';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
 
 // This component will handle the rotation of the stars
@@ -9,11 +9,11 @@ const AnimatedStars = () => {
 
   useFrame(() => {
     if (starsRef.current) {
-      starsRef.current.rotation.y += 0.0005;
+      starsRef.current.rotation.y += 0.001; // Increased rotation speed for more elaborate effect
     }
   });
 
-  return <Stars ref={starsRef} />;
+  return <Stars ref={starsRef} color="#FFF" />;
 };
 
 // This component will display the SciFiHelmet model
@@ -36,12 +36,31 @@ const SpaceTheme = () => {
 
   useEffect(() => {
     const currentCanvas = canvasRef.current;
+    currentCanvas.style.width = '100vw';
+    currentCanvas.style.height = '100vh';
     currentCanvas.addEventListener('webglcontextlost', handleContextLost);
 
     return () => {
       currentCanvas.removeEventListener('webglcontextlost', handleContextLost);
     };
   }, []);
+
+  // Planets component (placeholder for actual implementation)
+  const Planets = () => {
+    // Placeholder spheres representing planets
+    return (
+      <>
+        <mesh position={[-2, 0, -5]}>
+          <sphereGeometry args={[1, 32, 32]} />
+          <meshStandardMaterial color="#7F5AF0" />
+        </mesh>
+        <mesh position={[5, -1, -10]}>
+          <sphereGeometry args={[0.5, 32, 32]} />
+          <meshStandardMaterial color="#2CB67D" />
+        </mesh>
+      </>
+    );
+  };
 
   return (
     <Canvas ref={canvasRef}>
@@ -62,6 +81,14 @@ const SpaceTheme = () => {
       />
       <AnimatedStars />
       <SciFiHelmetModel />
+      <Planets />
+      <Html position={[0, 0, 0]}>
+        <div className="overlay">
+          <button style={{ fontFamily: 'Poppins, sans-serif', backgroundColor: '#7F5AF0', color: 'white', border: 'none', padding: '10px 20px', cursor: 'pointer', transition: 'background-color 0.3s ease' }} onClick={() => console.log('Interacted with 3D button!')}>
+            Click Me
+          </button>
+        </div>
+      </Html>
     </Canvas>
   );
 };

@@ -6,6 +6,7 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background-color: #0D1B2A;
+  overflow: hidden; /* Prevent scrolling */
 }
 
 code {
@@ -20,8 +21,25 @@ button {
   padding: 10px 20px;
   cursor: pointer;
   transition: background-color 0.3s ease;
+  border-radius: 5px; /* Rounded corners for buttons */
 }
 
 button:hover {
   background-color: #2CB67D;
+}
+
+/* Full-page canvas styles */
+canvas {
+  width: 100vw;
+  height: 100vh;
+  display: block; /* Remove extra space below the canvas */
+}
+
+/* Overlay class for positioning UI elements over the canvas */
+.overlay {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 10; /* Ensure it's above the canvas */
 }
