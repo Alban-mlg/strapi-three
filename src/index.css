@@ -5,7 +5,8 @@ body {
   font-family: 'Poppins', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: #0D1B2A;
+  background-color: #0D1B2A; /* Darker shade for background */
+  color: #E0E1DD; /* Light grey color for text for better readability on dark background */
   overflow: hidden; /* Prevent scrolling */
 }
 
@@ -15,17 +16,19 @@ code {
 
 button {
   font-family: 'Poppins', sans-serif;
-  background-color: #7F5AF0;
-  color: white;
-  border: none;
+  background-color: #1F4287; /* Dark blue background for buttons */
+  color: #E0E1DD; /* Light grey color for text */
+  border: 2px solid #278EA5; /* Add border to button for more definition */
   padding: 10px 20px;
   cursor: pointer;
-  transition: background-color 0.3s ease;
+  transition: all 0.3s ease; /* Transition for all properties for smoother effect */
   border-radius: 5px; /* Rounded corners for buttons */
 }
 
 button:hover {
-  background-color: #2CB67D;
+  background-color: #21E6C1; /* Bright color for hover state */
+  color: #0D1B2A; /* Dark color for text on hover for contrast */
+  border-color: #21E6C1; /* Border color transitions to match background on hover */
 }
 
 /* Full-page canvas styles */
@@ -42,4 +45,32 @@ canvas {
   left: 50%;
   transform: translate(-50%, -50%);
   z-index: 10; /* Ensure it's above the canvas */
+}
+
+/* Styles for interactive navigation elements */
+.nav-item {
+  color: #E0E1DD; /* Light grey color for text */
+  background-color: transparent; /* Transparent background for a clean look */
+  padding: 5px 15px;
+  cursor: pointer;
+  transition: transform 0.3s ease; /* Smooth transform transition for interaction */
+}
+
+.nav-item:hover {
+  transform: scale(1.1); /* Slightly enlarge on hover for emphasis */
+}
+
+/* Carousel navigation button styles */
+.carousel-button {
+  background-color: #112D4E; /* Dark blue background for carousel buttons */
+  color: #E0E1DD; /* Light grey color for text */
+  border: none;
+  padding: 8px 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease; /* Smooth background color transition */
+  border-radius: 5px; /* Rounded corners for carousel buttons */
+}
+
+.carousel-button:hover {
+  background-color: #3F72AF; /* Lighter blue for hover state */
 }
