@@ -66,7 +66,8 @@ const Planets = () => {
         <sphereGeometry args={[0.5, 32, 32]} />
         <meshStandardMaterial map={marsTexture} />
       </mesh>
-      <ambientLight intensity={2} /> {/* Increased ambient light intensity */}
+      {/* Increased ambient light intensity */}
+      <ambientLight intensity={2} />
       {/* Point lights added near Jupiter for localized lighting */}
       <pointLight position={[5, 0, -18]} intensity={5} color="#ffffff" />
       <pointLight position={[5, 0, -22]} intensity={5} color="#ffffff" />
@@ -81,7 +82,8 @@ const SpaceTheme = () => {
 
   return (
     <Canvas style={{ width: '100vw', height: '100vh' }}>
-      <ambientLight intensity={0.5} /> {/* Reduced ambient light intensity for better contrast */}
+      {/* Reduced ambient light intensity for better contrast */}
+      <ambientLight intensity={0.5} />
       <directionalLight
         intensity={1} // Reduced directional light intensity
         position={[0, 10, 0]}
