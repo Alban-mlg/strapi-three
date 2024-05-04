@@ -52,10 +52,11 @@ const Planets = () => {
         <meshStandardMaterial map={marsTexture} />
       </mesh>
       {/* New Jupiter mesh */}
-      <mesh position={[10, 2, -20]}>
+      <mesh position={[5, 0, -10]}>
         <sphereGeometry args={[2, 32, 32]} />
         <meshStandardMaterial map={jupiterTexture} />
       </mesh>
+      <ambientLight intensity={1} />
     </>
   );
 };
@@ -65,15 +66,10 @@ const SpaceTheme = () => {
   console.log('Rendering SpaceTheme component');
   const cameraRef = useRef();
 
-  // Event handler for WebGL context lost
-  const handleContextLost = (event) => {
-    event.preventDefault();
-    console.warn('WebGL context lost. Recovering...');
-    // Here you can add any recovery logic or display a message to the user
-  };
+  // Removed handleContextLost function and onContextLost prop from Canvas
 
   return (
-    <Canvas onContextLost={handleContextLost}>
+    <Canvas>
       <PerspectiveCamera ref={cameraRef} makeDefault fov={75} position={[5, 2, 10]} />
       <OrbitControls enableZoom={true} enablePan={true} />
       <ambientLight intensity={0.5} />
