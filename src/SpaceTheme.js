@@ -20,9 +20,11 @@ const AnimatedStars = () => {
       ref={starsRef}
       color="#ffffff" // Brighter color for better visibility
       count={7000} // Increased count for a denser star field
-      factor={7}
-      saturation={0}
-      fade={true}
+      factor={7} // Spread of stars
+      saturation={1} // Full color saturation for maximum brightness
+      fade={true} // Fade effect for depth
+      radius={100} // Increasing the radius to ensure stars are within camera view
+      size={1} // Increase size for better visibility
     />
   );
 };
