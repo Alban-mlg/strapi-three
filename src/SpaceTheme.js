@@ -2,7 +2,6 @@ import React, { useRef } from 'react';
 import { Canvas, useLoader, useFrame } from '@react-three/fiber';
 import { OrbitControls, Stars, PerspectiveCamera, Html } from '@react-three/drei';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
-import * as THREE from 'three';
 import { TextureLoader } from 'three/src/loaders/TextureLoader';
 
 // This component will handle the rotation of the stars
@@ -37,12 +36,17 @@ const SciFiHelmetModel = () => {
 // Planets component with detailed and textured planet models
 const Planets = () => {
   const textureLoader = new TextureLoader();
+  const jupiterTexture = textureLoader.load('textures/2k_jupiter.jpg'); // Updated texture path for Jupiter
   const earthTexture = textureLoader.load('textures/earth.jpg');
   const marsTexture = textureLoader.load('textures/mars.jpg');
-  const jupiterTexture = textureLoader.load('textures/jupiter.jpg'); // New texture for Jupiter
 
   return (
     <>
+      {/* New Jupiter mesh */}
+      <mesh position={[0, 0, -30]}>
+        <sphereGeometry args={[5, 32, 32]} />
+        <meshStandardMaterial map={jupiterTexture} />
+      </mesh>
       <mesh position={[-2, 0, -5]}>
         <sphereGeometry args={[1, 32, 32]} />
         <meshStandardMaterial map={earthTexture} />
@@ -50,11 +54,6 @@ const Planets = () => {
       <mesh position={[5, -1, -10]}>
         <sphereGeometry args={[0.5, 32, 32]} />
         <meshStandardMaterial map={marsTexture} />
-      </mesh>
-      {/* New Jupiter mesh */}
-      <mesh position={[5, 0, -15]}>
-        <sphereGeometry args={[2.5, 32, 32]} />
-        <meshStandardMaterial map={jupiterTexture} />
       </mesh>
       <ambientLight intensity={2} /> {/* Increased ambient light intensity */}
       {/* Point lights added near Jupiter for localized lighting */}
@@ -71,7 +70,7 @@ const SpaceTheme = () => {
 
   return (
     <Canvas>
-      <ambientLight intensity={5} /> {/* Increased ambient light intensity for better visibility */}
+      <ambientLight intensity={10} />
       <directionalLight
         intensity={5} // Significantly increased directional light intensity
         position={[0, 10, 0]} // Adjusted position to better illuminate the scene
@@ -87,19 +86,37 @@ const SpaceTheme = () => {
       {/* Point lights added near Jupiter for localized lighting */}
       <pointLight position={[5, 0, -18]} intensity={5} color="#ffffff" />
       <pointLight position={[5, 0, -22]} intensity={5} color="#ffffff" />
-      <PerspectiveCamera ref={cameraRef} makeDefault fov={90} position={[0, 0, 50]} />
-      <OrbitControls enableZoom={true} enablePan={true} target={[5, 0, -15]} />
+      <PerspectiveCamera ref={cameraRef} makeDefault fov={75} position={[0, 0, 100]} />
+      <OrbitControls enableZoom={true} enablePan={true} target={[10, 10, -50]} />
       <AnimatedStars />
       <SciFiHelmetModel />
       <Planets />
-      <Html position={[0, 0, 0]}>
-        <div className="overlay">
-          <button style={{ fontFamily: 'Poppins, sans-serif', backgroundColor: '#7F5AF0', color: 'white', border: 'none', padding: '10px 20px', cursor: 'pointer', transition: 'background-color 0.3s ease' }} onClick={() => console.log('Interacted with 3D button!')}>
-            Explore
-          </button>
-        </div>
+      <Html position={[0, 0, 0]} center>
+        <button className="explore-button" onClick={() => console.log('Interacted with 3D button!')}
+          style={{
+            padding: '15px 30px',
+            fontSize: '1.5rem',
+            fontWeight: '600',
+            border: 'none',
+            borderRadius: '5px',
+            background: 'linear-gradient(145deg, #21E6C1, #278EA5)',
+            color: '#0D1B2A',
+            boxShadow: '0 4px 8px 0 rgba(0, 0, 0, 0.2)',
+            cursor: 'pointer',
+            transition: 'transform 0.3s ease, box-shadow 0.3s ease'
+          }}
+          onMouseEnter={e => {
+            e.target.style.transform = 'scale(1.05)';
+            e.target.style.boxShadow = '0 6px 12px 0 rgba(0, 0, 0, 0.3)';
+          }}
+          onMouseLeave={e => {
+            e.target.style.transform = 'scale(1)';
+            e.target.style.boxShadow = '0 4px 8px 0 rgba(0, 0, 0, 0.2)';
+          }}
+        >
+          Explore
+        </button>
       </Html>
-      {/* <CameraMovement cameraRef={cameraRef} /> */}
     </Canvas>
   );
 };
