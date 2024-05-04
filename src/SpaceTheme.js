@@ -19,10 +19,10 @@ const AnimatedStars = () => {
     <Stars
       ref={starsRef}
       color="#FFF"
-      count={5000} // Increased number of stars for a more elaborate effect
-      factor={4} // Increased factor for more spread
-      saturation={0} // No color saturation for pure white stars
-      fade // Add a fading effect to the stars
+      count={5000}
+      factor={7} // Increased factor for a wider spread
+      saturation={0}
+      fade={true}
     />
   );
 };
@@ -79,10 +79,10 @@ const SpaceTheme = () => {
 
   return (
     <Canvas style={{ width: '100vw', height: '100vh' }}>
-      <ambientLight intensity={10} />
+      <ambientLight intensity={0.5} /> {/* Reduced ambient light intensity for better contrast */}
       <directionalLight
-        intensity={5} // Significantly increased directional light intensity
-        position={[0, 10, 0]} // Adjusted position to better illuminate the scene
+        intensity={1} // Reduced directional light intensity
+        position={[0, 10, 0]}
         castShadow
         shadow-mapSize-height={512}
         shadow-mapSize-width={512}
