@@ -57,6 +57,9 @@ const Planets = () => {
         <meshStandardMaterial map={jupiterTexture} />
       </mesh>
       <ambientLight intensity={2} /> {/* Increased ambient light intensity */}
+      {/* Point lights added near Jupiter for localized lighting */}
+      <pointLight position={[5, 0, -18]} intensity={5} color="#ffffff" />
+      <pointLight position={[5, 0, -22]} intensity={5} color="#ffffff" />
     </>
   );
 };
@@ -70,7 +73,7 @@ const SpaceTheme = () => {
     <Canvas>
       <ambientLight intensity={2.5} /> {/* Further increased ambient light intensity for better visibility */}
       <directionalLight
-        intensity={1.5} // Increased directional light intensity
+        intensity={5} // Significantly increased directional light intensity
         position={[0, 10, 0]} // Adjusted position to better illuminate the scene
         castShadow
         shadow-mapSize-height={512}
@@ -81,6 +84,9 @@ const SpaceTheme = () => {
         shadow-camera-top={10}
         shadow-camera-bottom={-10}
       />
+      {/* Point lights added near Jupiter for localized lighting */}
+      <pointLight position={[5, 0, -18]} intensity={5} color="#ffffff" />
+      <pointLight position={[5, 0, -22]} intensity={5} color="#ffffff" />
       <PerspectiveCamera ref={cameraRef} makeDefault fov={75} position={[5, 0, 20]} /> {/* Adjusted camera position closer to Jupiter */}
       <OrbitControls enableZoom={true} enablePan={true} />
       <AnimatedStars />
