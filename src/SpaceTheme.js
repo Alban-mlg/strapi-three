@@ -68,12 +68,10 @@ const SpaceTheme = () => {
 
   return (
     <Canvas>
-      <PerspectiveCamera ref={cameraRef} makeDefault fov={75} position={[5, 0, 25]} /> {/* Adjusted camera position */}
-      <OrbitControls enableZoom={true} enablePan={true} />
-      <ambientLight intensity={2} /> {/* Increased ambient light intensity */}
+      <ambientLight intensity={2.5} /> {/* Further increased ambient light intensity for better visibility */}
       <directionalLight
-        intensity={1}
-        position={[0, 10, 0]}
+        intensity={1.5} // Increased directional light intensity
+        position={[0, 10, 0]} // Adjusted position to better illuminate the scene
         castShadow
         shadow-mapSize-height={512}
         shadow-mapSize-width={512}
@@ -83,6 +81,8 @@ const SpaceTheme = () => {
         shadow-camera-top={10}
         shadow-camera-bottom={-10}
       />
+      <PerspectiveCamera ref={cameraRef} makeDefault fov={75} position={[5, 0, 20]} /> {/* Adjusted camera position closer to Jupiter */}
+      <OrbitControls enableZoom={true} enablePan={true} />
       <AnimatedStars />
       <SciFiHelmetModel />
       <Planets />
