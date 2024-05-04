@@ -39,6 +39,7 @@ const Planets = () => {
   const textureLoader = new TextureLoader();
   const earthTexture = textureLoader.load('textures/earth.jpg');
   const marsTexture = textureLoader.load('textures/mars.jpg');
+  const jupiterTexture = textureLoader.load('textures/jupiter.jpg'); // New texture for Jupiter
 
   return (
     <>
@@ -49,6 +50,11 @@ const Planets = () => {
       <mesh position={[5, -1, -10]}>
         <sphereGeometry args={[0.5, 32, 32]} />
         <meshStandardMaterial map={marsTexture} />
+      </mesh>
+      {/* New Jupiter mesh */}
+      <mesh position={[10, 2, -20]}>
+        <sphereGeometry args={[2, 32, 32]} />
+        <meshStandardMaterial map={jupiterTexture} />
       </mesh>
     </>
   );
