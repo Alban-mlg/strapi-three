@@ -52,11 +52,11 @@ const Planets = () => {
         <meshStandardMaterial map={marsTexture} />
       </mesh>
       {/* New Jupiter mesh */}
-      <mesh position={[5, 0, -10]}>
+      <mesh position={[5, 0, -20]}>
         <sphereGeometry args={[2, 32, 32]} />
         <meshStandardMaterial map={jupiterTexture} />
       </mesh>
-      <ambientLight intensity={1} />
+      <ambientLight intensity={1.5} /> {/* Increased ambient light intensity */}
     </>
   );
 };
@@ -66,13 +66,11 @@ const SpaceTheme = () => {
   console.log('Rendering SpaceTheme component');
   const cameraRef = useRef();
 
-  // Removed handleContextLost function and onContextLost prop from Canvas
-
   return (
     <Canvas>
-      <PerspectiveCamera ref={cameraRef} makeDefault fov={75} position={[5, 2, 10]} />
+      <PerspectiveCamera ref={cameraRef} makeDefault fov={75} position={[0, 0, 30]} /> {/* Adjusted camera position */}
       <OrbitControls enableZoom={true} enablePan={true} />
-      <ambientLight intensity={0.5} />
+      <ambientLight intensity={1.5} /> {/* Increased ambient light intensity */}
       <directionalLight
         intensity={1}
         position={[0, 10, 0]}
@@ -105,7 +103,7 @@ const CameraMovement = ({ cameraRef }) => {
   useFrame(({ mouse }) => {
     const x = (mouse.x * 0.2);
     const y = (mouse.y * 0.2);
-    cameraRef.current.position.lerp(new THREE.Vector3(x, y, 5), 0.1);
+    cameraRef.current.position.lerp(new THREE.Vector3(x, y, 30), 0.1); // Adjusted camera lerp position
   });
 
   return null;
