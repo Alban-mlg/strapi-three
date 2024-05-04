@@ -1,7 +1,9 @@
-import React, { useRef, useEffect } from 'react';
+import React, { useRef } from 'react';
 import { Canvas, useLoader, useFrame } from '@react-three/fiber';
 import { OrbitControls, Stars, PerspectiveCamera, Html } from '@react-three/drei';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
+import * as THREE from 'three';
+import { TextureLoader } from 'three/src/loaders/TextureLoader';
 
 // This component will handle the rotation of the stars
 const AnimatedStars = () => {
@@ -9,7 +11,7 @@ const AnimatedStars = () => {
 
   useFrame(() => {
     if (starsRef.current) {
-      starsRef.current.rotation.y += 0.001; // Increased rotation speed for more elaborate effect
+      starsRef.current.rotation.y += 0.004; // Increased rotation speed for more elaborate effect
     }
   });
 
@@ -22,10 +24,30 @@ const SciFiHelmetModel = () => {
   return <primitive object={gltf.scene} scale={[2, 2, 2]} />;
 };
 
+// Planets component with detailed and textured planet models
+const Planets = () => {
+  const textureLoader = new TextureLoader();
+  const earthTexture = textureLoader.load('textures/earth.jpg');
+  const marsTexture = textureLoader.load('textures/mars.jpg');
+
+  return (
+    <>
+      <mesh position={[-2, 0, -5]}>
+        <sphereGeometry args={[1, 32, 32]} />
+        <meshStandardMaterial map={earthTexture} />
+      </mesh>
+      <mesh position={[5, -1, -10]}>
+        <sphereGeometry args={[0.5, 32, 32]} />
+        <meshStandardMaterial map={marsTexture} />
+      </mesh>
+    </>
+  );
+};
+
 // This component will create a more immersive 3D space environment with interactive elements
 const SpaceTheme = () => {
   console.log('Rendering SpaceTheme component');
-  const canvasRef = useRef();
+  const cameraRef = useRef();
 
   // Event handler for WebGL context lost
   const handleContextLost = (event) => {
@@ -34,37 +56,9 @@ const SpaceTheme = () => {
     // Here you can add any recovery logic or display a message to the user
   };
 
-  useEffect(() => {
-    const currentCanvas = canvasRef.current;
-    currentCanvas.style.width = '100vw';
-    currentCanvas.style.height = '100vh';
-    currentCanvas.addEventListener('webglcontextlost', handleContextLost);
-
-    return () => {
-      currentCanvas.removeEventListener('webglcontextlost', handleContextLost);
-    };
-  }, []);
-
-  // Planets component (placeholder for actual implementation)
-  const Planets = () => {
-    // Placeholder spheres representing planets
-    return (
-      <>
-        <mesh position={[-2, 0, -5]}>
-          <sphereGeometry args={[1, 32, 32]} />
-          <meshStandardMaterial color="#7F5AF0" />
-        </mesh>
-        <mesh position={[5, -1, -10]}>
-          <sphereGeometry args={[0.5, 32, 32]} />
-          <meshStandardMaterial color="#2CB67D" />
-        </mesh>
-      </>
-    );
-  };
-
   return (
-    <Canvas ref={canvasRef}>
-      <PerspectiveCamera makeDefault position={[0, 0, 5]} />
+    <Canvas onContextLost={handleContextLost}>
+      <PerspectiveCamera ref={cameraRef} makeDefault position={[0, 0, 5]} />
       <OrbitControls />
       <ambientLight intensity={0.5} />
       <directionalLight
@@ -85,12 +79,24 @@ const SpaceTheme = () => {
       <Html position={[0, 0, 0]}>
         <div className="overlay">
           <button style={{ fontFamily: 'Poppins, sans-serif', backgroundColor: '#7F5AF0', color: 'white', border: 'none', padding: '10px 20px', cursor: 'pointer', transition: 'background-color 0.3s ease' }} onClick={() => console.log('Interacted with 3D button!')}>
-            Click Me
+            Explore
           </button>
         </div>
       </Html>
+      <CameraMovement cameraRef={cameraRef} />
     </Canvas>
   );
+};
+
+// This component will handle the camera movement based on mouse position
+const CameraMovement = ({ cameraRef }) => {
+  useFrame(({ mouse }) => {
+    const x = (mouse.x * 0.2);
+    const y = (mouse.y * 0.2);
+    cameraRef.current.position.lerp(new THREE.Vector3(x, y, 5), 0.1);
+  });
+
+  return null;
 };
 
 export default SpaceTheme;
