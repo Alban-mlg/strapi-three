@@ -74,8 +74,8 @@ const SpaceTheme = () => {
 
   return (
     <Canvas onContextLost={handleContextLost}>
-      <PerspectiveCamera ref={cameraRef} makeDefault position={[0, 0, 5]} />
-      <OrbitControls />
+      <PerspectiveCamera ref={cameraRef} makeDefault fov={75} position={[5, 2, 10]} />
+      <OrbitControls enableZoom={true} enablePan={true} />
       <ambientLight intensity={0.5} />
       <directionalLight
         intensity={1}
