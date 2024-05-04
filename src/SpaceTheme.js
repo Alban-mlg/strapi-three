@@ -18,9 +18,9 @@ const AnimatedStars = () => {
   return (
     <Stars
       ref={starsRef}
-      color="#FFF"
-      count={5000}
-      factor={7} // Increased factor for a wider spread
+      color="#ffffff" // Brighter color for better visibility
+      count={7000} // Increased count for a denser star field
+      factor={7}
       saturation={0}
       fade={true}
     />
@@ -92,7 +92,7 @@ const SpaceTheme = () => {
         shadow-camera-top={10}
         shadow-camera-bottom={-10}
       />
-      <PerspectiveCamera ref={cameraRef} makeDefault fov={75} position={[0, 0, 30]} />
+      <PerspectiveCamera ref={cameraRef} makeDefault fov={75} position={[0, 0, 20]} /> {/* Brought camera closer to the origin */}
       <OrbitControls enableZoom={true} enablePan={true} target={[0, 0, 0]} />
       <AnimatedStars />
       <SciFiHelmetModel />
