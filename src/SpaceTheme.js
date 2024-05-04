@@ -71,7 +71,7 @@ const SpaceTheme = () => {
 
   return (
     <Canvas>
-      <ambientLight intensity={2.5} /> {/* Further increased ambient light intensity for better visibility */}
+      <ambientLight intensity={3} /> {/* Increased ambient light intensity for better visibility */}
       <directionalLight
         intensity={5} // Significantly increased directional light intensity
         position={[0, 10, 0]} // Adjusted position to better illuminate the scene
@@ -87,7 +87,7 @@ const SpaceTheme = () => {
       {/* Point lights added near Jupiter for localized lighting */}
       <pointLight position={[5, 0, -18]} intensity={5} color="#ffffff" />
       <pointLight position={[5, 0, -22]} intensity={5} color="#ffffff" />
-      <PerspectiveCamera ref={cameraRef} makeDefault fov={75} position={[5, 0, -20]} />
+      <PerspectiveCamera ref={cameraRef} makeDefault fov={75} position={[5, 0, -30]} />
       <OrbitControls enableZoom={true} enablePan={true} target={[5, 0, -20]} />
       <AnimatedStars />
       <SciFiHelmetModel />
