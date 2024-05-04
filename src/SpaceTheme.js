@@ -87,8 +87,8 @@ const SpaceTheme = () => {
       {/* Point lights added near Jupiter for localized lighting */}
       <pointLight position={[5, 0, -18]} intensity={5} color="#ffffff" />
       <pointLight position={[5, 0, -22]} intensity={5} color="#ffffff" />
-      <PerspectiveCamera ref={cameraRef} makeDefault fov={75} position={[5, 0, 20]} /> {/* Adjusted camera position closer to Jupiter */}
-      <OrbitControls enableZoom={true} enablePan={true} />
+      <PerspectiveCamera ref={cameraRef} makeDefault fov={75} position={[5, 0, -20]} />
+      <OrbitControls enableZoom={true} enablePan={true} target={[5, 0, -20]} />
       <AnimatedStars />
       <SciFiHelmetModel />
       <Planets />
