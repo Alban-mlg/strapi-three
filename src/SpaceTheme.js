@@ -1,6 +1,6 @@
 import React, { useRef } from 'react';
 import { Canvas, useLoader, useFrame } from '@react-three/fiber';
-import { OrbitControls, Stars, PerspectiveCamera, Html } from '@react-three/drei';
+import { OrbitControls, Stars, PerspectiveCamera } from '@react-three/drei';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
 import { TextureLoader } from 'three/src/loaders/TextureLoader';
 
@@ -91,32 +91,10 @@ const SpaceTheme = () => {
       <AnimatedStars />
       <SciFiHelmetModel />
       <Planets />
-      <Html position={[0, 0, 0]} center>
-        <button className="explore-button" onClick={() => console.log('Interacted with 3D button!')}
-          style={{
-            padding: '15px 30px',
-            fontSize: '1.5rem',
-            fontWeight: '600',
-            border: 'none',
-            borderRadius: '5px',
-            background: 'linear-gradient(145deg, #21E6C1, #278EA5)',
-            color: '#0D1B2A',
-            boxShadow: '0 4px 8px 0 rgba(0, 0, 0, 0.2)',
-            cursor: 'pointer',
-            transition: 'transform 0.3s ease, box-shadow 0.3s ease'
-          }}
-          onMouseEnter={e => {
-            e.target.style.transform = 'scale(1.05)';
-            e.target.style.boxShadow = '0 6px 12px 0 rgba(0, 0, 0, 0.3)';
-          }}
-          onMouseLeave={e => {
-            e.target.style.transform = 'scale(1)';
-            e.target.style.boxShadow = '0 4px 8px 0 rgba(0, 0, 0, 0.2)';
-          }}
-        >
-          Explore
-        </button>
-      </Html>
+      <mesh position={[0, 0, 0]} onClick={() => console.log('Interacted with 3D button!')}>
+        <boxGeometry args={[1, 0.1, 0.5]} />
+        <meshStandardMaterial color="lightblue" />
+      </mesh>
     </Canvas>
   );
 };

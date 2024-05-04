@@ -14,7 +14,7 @@ code {
   font-family: 'Source Code Pro', monospace;
 }
 
-button {
+button, .explore-button {
   font-family: 'Poppins', sans-serif;
   background-color: #1F4287; /* Dark blue background for buttons */
   color: #E0E1DD; /* Light grey color for text */
@@ -25,7 +25,7 @@ button {
   border-radius: 5px; /* Rounded corners for buttons */
 }
 
-button:hover {
+button:hover, .explore-button:hover {
   background-color: #21E6C1; /* Bright color for hover state */
   color: #0D1B2A; /* Dark color for text on hover for contrast */
   border-color: #21E6C1; /* Border color transitions to match background on hover */
